@@ -5,11 +5,14 @@
   "typings": "index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "tsc -p . -d"
+    "build": "tsc -p . -d",
+    "test": "jest"
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",
     "@types/node": "^10.12.18",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
     "typescript": "^3.2.2"
   },
   "dependencies": {
