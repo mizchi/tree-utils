@@ -1,0 +1,23 @@
+{
+  "name": "@mizchi/tree-utils",
+  "version": "0.1.0",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p . -d"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.12",
+    "@types/node": "^10.12.18",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "immer": "^1.10.0",
+    "lodash.clone": "^4.5.0"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ]
+}
