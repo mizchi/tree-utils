@@ -1,6 +1,6 @@
 {
   "name": "@mizchi/tree-utils",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "index.js",
   "typings": "index.d.ts",
   "license": "MIT",
