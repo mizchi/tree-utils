@@ -1,5 +1,5 @@
 {
-  "include": ["index.ts", "decls.d.ts"],
+  "include": ["index.ts", "decls.d.ts", "inverted.ts"],
   "exclude": ["node_modules", "jest.config.js", "dist", "index.js"],
   "compilerOptions": {
     /* Basic Options */

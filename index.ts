@@ -4,7 +4,7 @@ import immer from "immer";
 export type Node<T> = {
   id: string;
   data: T;
-  children?: Array<Node<T>>;
+  children: Array<Node<T>>;
 };
 
 export type Cursor = number[];
@@ -36,11 +36,11 @@ export function setNodeWithCursor<T>(
       const idx = newCursor.shift() as number;
       if (newCursor.length === 0) {
         // replace node and end
-        currentNode.children && (currentNode.children[idx] = node);
+        currentNode.children[idx] = node;
         break;
       } else {
         // dig
-        currentNode.children && (currentNode = currentNode.children[idx]);
+        currentNode = currentNode.children[idx];
       }
     }
   });

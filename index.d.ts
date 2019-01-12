@@ -1,7 +1,7 @@
 export declare type Node<T> = {
     id: string;
     data: T;
-    children?: Array<Node<T>>;
+    children: Array<Node<T>>;
 };
 export declare type Cursor = number[];
 export declare function createNode<T>(data: T, children?: Array<Node<T>>): Node<T>;

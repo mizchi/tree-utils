@@ -65,6 +65,54 @@ assert.deepEqual(r1.children[1].children.map(i => i.id), ["c1-1"]);
 
 See detail `index.d.ts` and `__tests__/index.test.ts`
 
+## Inverted
+
+Performant inverted version
+
+```ts
+import * as treeUtils from "@mizchi/tree-utils/inverted";
+
+const inv = treeUtils.toInvertedTree({ id: "1", data: 1, children: [] });
+const inv2 = treeUtils.appendNode(
+  inv,
+  {
+    id: "2",
+    data: 2,
+    children: [
+      {
+        id: "3",
+        data: 3,
+        children: []
+      }
+    ]
+  },
+  "1"
+);
+
+assert.deepEqual(inv2, {
+  childrenMap: {
+    "1": ["2"],
+    "2": ["3"],
+    "3": []
+  },
+  dataMap: {
+    "1": 1,
+    "2": 2,
+    "3": 3
+  },
+  parentMap: {
+    "1": null,
+    "2": "1",
+    "3": "2"
+  }
+});
+
+// convert to node tree
+const node = treeUtils.toNode(inv2);
+```
+
+See detail `inverted.ts` and `__tests__/inverted.d.ts`
+
 ## LICENSE
 
 MIT

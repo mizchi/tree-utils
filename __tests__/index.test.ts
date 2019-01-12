@@ -35,7 +35,7 @@ const sampleTree1: Node<number> = {
   ]
 };
 
-const sampleTree2: Node<number> = {
+export const sampleTree2: Node<number> = {
   id: "root",
   data: 1,
   children: [
@@ -89,14 +89,22 @@ test("findParentId", () => {
 });
 
 test("appendNodeBefore/appendNodeAfter", () => {
-  const t0 = appendNodeBefore(sampleTree1, { id: "x", data: 0 }, "c0");
-  const t1 = appendNodeBefore(t0, { id: "y", data: 0 }, "c1-0");
+  const t0 = appendNodeBefore(
+    sampleTree1,
+    { id: "x", data: 0, children: [] },
+    "c0"
+  );
+  const t1 = appendNodeBefore(t0, { id: "y", data: 0, children: [] }, "c1-0");
   // @ts-ignore
   assert.equal(t1.children[0].id, "x");
   // @ts-ignore
   assert.equal(t1.children[2].children[0].id, "y");
 
-  const t2 = appendNodeBefore(sampleTree1, { id: "z", data: 0 }, "c1");
+  const t2 = appendNodeBefore(
+    sampleTree1,
+    { id: "z", data: 0, children: [] },
+    "c1"
+  );
   // @ts-ignore
   assert.equal(t2.children[0].id, "c0");
   // @ts-ignore
@@ -104,7 +112,11 @@ test("appendNodeBefore/appendNodeAfter", () => {
   // @ts-ignore
   assert.equal(t2.children[2].id, "c1");
 
-  const t3 = appendNodeAfter(sampleTree1, { id: "k", data: 0 }, "c0");
+  const t3 = appendNodeAfter(
+    sampleTree1,
+    { id: "k", data: 0, children: [] },
+    "c0"
+  );
   // @ts-ignore
   assert.equal(t3.children[0].id, "c0");
   // @ts-ignore
@@ -114,12 +126,20 @@ test("appendNodeBefore/appendNodeAfter", () => {
 });
 
 test("replaceNodeById", () => {
-  const newTree = replaceNodeById(sampleTree1, { id: "x", data: 1 }, "c0");
+  const newTree = replaceNodeById(
+    sampleTree1,
+    { id: "x", data: 1, children: [] },
+    "c0"
+  );
   // @ts-ignore
   assert.equal(newTree.children[0].id, "x");
 
   // replace root
-  const newTree2 = replaceNodeById(sampleTree1, { id: "x", data: 1 }, "root");
+  const newTree2 = replaceNodeById(
+    sampleTree1,
+    { id: "x", data: 1, children: [] },
+    "root"
+  );
   // @ts-ignore
   assert.equal(newTree2.id, "x");
 });
@@ -140,12 +160,20 @@ test("getCursor", () => {
 });
 
 test("setNodeWithCursor", () => {
-  const r = setNodeWithCursor(sampleTree1, { id: "added", data: 0 }, [1, 0]);
+  const r = setNodeWithCursor(
+    sampleTree1,
+    { id: "added", data: 0, children: [] },
+    [1, 0]
+  );
   // @ts-ignore
   assert.equal(r.children[1].children[0].id, "added");
 
   // replace root
-  const r2 = setNodeWithCursor(sampleTree1, { id: "added", data: 0 }, []);
+  const r2 = setNodeWithCursor(
+    sampleTree1,
+    { id: "added", data: 0, children: [] },
+    []
+  );
   // @ts-ignore
   assert.equal(r2.id, "added");
 });
