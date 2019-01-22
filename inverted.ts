@@ -1,5 +1,10 @@
-import { Node } from "./";
 import immer, { Draft } from "immer";
+
+export type Node<T> = {
+  id: string;
+  data: T;
+  children: Array<Node<T>>;
+};
 
 export type InvertedTree<T> = {
   childrenMap: {
@@ -71,13 +76,29 @@ export function toNode<T>(inv: InvertedTree<T>): Node<T> {
 
 export function removeNode<T>(inv: InvertedTree<T>, targetId: string) {
   return immer(inv, newInv => {
+    function walk(targetId: string) {
+      const children = newInv.childrenMap[targetId];
+      children.forEach(cid => walk(cid));
+
+      delete newInv.parentMap[targetId];
+      delete newInv.dataMap[targetId];
+      delete newInv.childrenMap[targetId];
+    }
+    // remove children
+    const children = newInv.childrenMap[targetId];
+    children.forEach(cid => walk(cid));
+
+    // remove self from parent children
     const parentId = newInv.parentMap[targetId] as string;
     const parentChildrenIds = newInv.childrenMap[parentId];
-    newInv.childrenMap[targetId] = parentChildrenIds.filter(
+    newInv.childrenMap[parentId] = parentChildrenIds.filter(
       id => id !== targetId
     );
+
+    // remove self
     delete newInv.parentMap[targetId];
     delete newInv.dataMap[targetId];
+    delete newInv.childrenMap[targetId];
   });
 }
 

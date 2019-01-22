@@ -1,5 +1,6 @@
 import assert from "assert";
-import { sampleTree2 } from "./index.test";
+import { sampleTree1, sampleTree2 } from "./index.test";
+import { Node } from "../index";
 import * as treeUtils from "../inverted";
 
 test("inv:toInvertedTree", () => {
@@ -183,4 +184,61 @@ test("inv:toNode", () => {
   const inv = treeUtils.toInvertedTree(sampleTree2);
   const node = treeUtils.toNode(inv);
   assert.deepEqual(sampleTree2, node);
+});
+
+test("inv:removeNode", () => {
+  const t: Node<number> = {
+    id: "root",
+    data: 1,
+    children: [
+      {
+        id: "c0",
+        data: 2,
+        children: []
+      }
+    ]
+  };
+  const inv = treeUtils.toInvertedTree(t);
+  const inv2 = treeUtils.removeNode(inv, "c0");
+  const node = treeUtils.toNode(inv2);
+  assert.deepEqual(node, {
+    id: "root",
+    data: 1,
+    children: []
+  });
+});
+
+test("inv:removeNode deep", () => {
+  const t: Node<number> = {
+    id: "root",
+    data: 1,
+    children: [
+      {
+        id: "c0",
+        data: 2,
+        children: [
+          {
+            id: "c0-0",
+            data: 3,
+            children: []
+          }
+        ]
+      }
+    ]
+  };
+
+  const inv = treeUtils.toInvertedTree(t);
+  const inv2 = treeUtils.removeNode(inv, "c0");
+  const node = treeUtils.toNode(inv2);
+  assert.deepEqual(node, {
+    id: "root",
+    data: 1,
+    children: []
+  });
+
+  assert.deepEqual(inv2, {
+    childrenMap: { root: [] },
+    parentMap: { root: null },
+    dataMap: { root: 1 }
+  });
 });

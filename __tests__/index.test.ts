@@ -12,7 +12,7 @@ import {
   Node
 } from "../";
 
-const sampleTree1: Node<number> = {
+export const sampleTree1: Node<number> = {
   id: "root",
   data: 1,
   children: [
