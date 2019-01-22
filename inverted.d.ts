@@ -1,4 +1,8 @@
-import { Node } from "./";
+export declare type Node<T> = {
+    id: string;
+    data: T;
+    children: Array<Node<T>>;
+};
 export declare type InvertedTree<T> = {
     childrenMap: {
         [id: string]: string[];
